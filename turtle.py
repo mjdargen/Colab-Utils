@@ -162,13 +162,14 @@ def right(degrees):
 
 
 # makes the turtle face a given direction
+# 90 degrees is straight up, 270 degrees is straight down
 def face(degrees):
     global turtle_degree
 
     if not (isinstance(degrees, int) or isinstance(degrees, float)):
         raise ValueError('degrees should be a number')
 
-    turtle_degree = degrees % 360
+    turtle_degree = (degrees + 180) % 360
     _updateDrawing()
 
 
