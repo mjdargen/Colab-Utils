@@ -15,9 +15,10 @@ def send_email(recipient, subject, body):
   img = PIL.Image.open('./Colab-Utils/mac.jpg')
   exif_data = img._getexif()
 
-  msg = f"Subject: {subject}\n{body}"
+  msg = f"From: {sender_email}\nTo: {recipient}\nSubject: {subject}\n\n{body}"
 
   context = ssl.create_default_context()
   with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-      server.login(sender_email, exif_data[33432])
-      server.sendmail(sender_email, recipient, msg)
+    server.ehlo()
+    server.login(sender_email, exif_data[33432])
+    server.sendmail(sender_email, recipient, msg)
